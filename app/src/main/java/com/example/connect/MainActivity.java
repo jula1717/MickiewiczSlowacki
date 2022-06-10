@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                         board[winningPosition[1]]==board[winningPosition[2]]&&      //jeśli na wszystkich trzech polach zwycięskiej kombinacji jest ten sam stan
                         board[winningPosition[0]]!=2)                               //ale nie jest to puste pole
                 {
-                    String winner = winningPosition[0]==0?"Mickiewicz":"Słowacki";
+                    String winner = activePlayer==false?"Słowacki":"Mickiewicz";
                     txtWinnerIs.setText("The winner is "+winner);
                     linearLayout.setVisibility(View.VISIBLE);
                 }
@@ -63,11 +63,15 @@ public class MainActivity extends AppCompatActivity {
     public void playAgain(View view)
     {
         linearLayout.setVisibility(View.INVISIBLE);
-        for (int field:board
-        ) {
-            field=2;
+//        for (int field:board
+//        ) {
+//            field=2;
+//        }
+       activePlayer = activePlayer==true?false:true; //zaczyna ten co wygrywa
+        for(int i = 0;i<board.length;i++)
+        {
+            board[i]=2;
         }
-        activePlayer = activePlayer==true?false:true;
         GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLayout);
         for(int i=0;i<gridLayout.getChildCount();i++)
         {
