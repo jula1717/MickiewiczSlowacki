@@ -156,7 +156,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:onClick="playAgain"
-            android:text="Button"
+            android:text="Play again"
             tools:text="Play again" />
     </LinearLayout>
 
