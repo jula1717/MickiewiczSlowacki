@@ -58,6 +58,19 @@ public class MainActivity extends AppCompatActivity {
                     txtWinnerIs.setText("The winner is "+winner);
                     linearLayout.setVisibility(View.VISIBLE);
                 }
+                else
+                {
+                    boolean gameOver=true;
+                    for (int field:board
+                         ) {
+                        if(field==2)gameOver=false;
+                    }
+                    if(gameOver)
+                    {
+                        txtWinnerIs.setText("It's a draw");
+                        linearLayout.setVisibility(View.VISIBLE);
+                    }
+                }
             }
         }
     }
