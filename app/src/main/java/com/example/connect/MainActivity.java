@@ -11,25 +11,25 @@ import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
-    TextView txtWinnerIs;
-    LinearLayout linearLayout;
-    //GridLayout gridLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         txtWinnerIs = (TextView) findViewById(R.id.txtWinnerIs);
         linearLayout = (LinearLayout) findViewById(R.id.GameOverLayout);
-    //    gridLayout = (GridLayout) findViewById(R.id.gridLayout);
+        isGameActive = true;
     }
+
+    TextView txtWinnerIs;
+    LinearLayout linearLayout;
+    boolean isGameActive;
     int [] board = {2,2,2,2,2,2,2,2,2}; //2 means empty, 1 means Słowacki, 0 means Mickiewicz
     int [][] winningPositions = {{0,3,6},{1,4,7},{2,5,8},{0,1,2},{3,4,5},{6,7,8},{0,4,8},{2,4,6}};
     boolean activePlayer = false; // false Mickiewicz | true Słowacki
     public void drop(View view) {
         ImageView clicked = (ImageView) view;
         int clickedOnBoard = Integer.parseInt(clicked.getTag().toString());
-        if (board[clickedOnBoard]==2)
+        if (board[clickedOnBoard]==2 && isGameActive)
         {
             clicked.setTranslationY(-200f);
             if(activePlayer ==false)
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                         board[winningPosition[1]]==board[winningPosition[2]]&&      //jeśli na wszystkich trzech polach zwycięskiej kombinacji jest ten sam stan
                         board[winningPosition[0]]!=2)                               //ale nie jest to puste pole
                 {
+                    isGameActive=false;
                     String winner = activePlayer==false?"Słowacki":"Mickiewicz";
                     txtWinnerIs.setText("The winner is "+winner);
                     linearLayout.setVisibility(View.VISIBLE);
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void playAgain(View view)
     {
+        isGameActive = true;
         linearLayout.setVisibility(View.INVISIBLE);
 //        for (int field:board
 //        ) {
